@@ -16,13 +16,13 @@ class Users extends Authenticatable implements JWTSubject
      * Define a conexão padrão de acesso  a tabela
      * @var string
      */
-    protected $connection = 'zaplist';
+    protected $connection = 'lojamarkvn';
 
     /**
      * Nome da tabela
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'configuracao';
 
     /**
      * Remove o autoincremento da chave primária

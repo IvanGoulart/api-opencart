@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Opencart;
+namespace App\Models\Opencart\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-      /**
+  /**
    * Identificador do produto
    * @var string
    */
@@ -36,8 +36,22 @@ class Customer extends Model
   public $timestamps = false;
 
 
-  public function address(){
+  /**
+   * Obter o endereço do cliente
+   * @return App\Models\Opencart\Address
+   */
+  public function address()
+  {
     return $this->hasOne('App\Models\Opencart\Address', 'address_id', 'customer_id');
-}
+  }
 
+  /**
+   * Traduz o JSON para um objeto usavel em PHP  
+   * @param string $value
+   * @return void object 
+   */
+  public function getCustomFieldAttribute($value)
+  {
+    return json_decode($value);
+  }
 }

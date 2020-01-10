@@ -12,10 +12,5 @@
 */
 
 Route::get('/', function () {
-    phpinfo();
-    //return view('welcome');
+    return response()->json(['status' => 'Server online']);
 });
-
-
-Route::get('/customer', 'Opencart\CustomerController@index');
-
