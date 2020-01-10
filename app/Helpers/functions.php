@@ -18,3 +18,8 @@ function getMemoryUsage()
         'memoryLimit' => ini_get('memory_limit')
     ];
 }
+
+function onlyNumbers($str)
+{
+    return preg_replace("/[^0-9]/", "", $str);
+}

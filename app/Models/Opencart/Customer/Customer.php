@@ -42,8 +42,16 @@ class Customer extends Model
    */
   public function address()
   {
-    return $this->hasOne('App\Models\Opencart\Address', 'address_id', 'customer_id');
+    return $this->hasOne('App\Models\Opencart\Customer\Address', 'customer_id', 'customer_id');
   }
+
+
+  /**
+   * The attributes that should be hidden for arrays.
+   *
+   * @var array
+   */
+  protected $hidden = ['password', 'token'];
 
   /**
    * Traduz o JSON para um objeto usavel em PHP  

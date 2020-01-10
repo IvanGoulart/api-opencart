@@ -14,11 +14,13 @@ Route::group([
      * CLIENTES
     ---------------------------------------------------*/
     Route::group(['prefix' => 'customer'], function () {
-        // Obtem todos clientes
-        Route::get('/', 'CustomersController@index');
-        // Obtem o cliente por userid
-        //Route::get('/{userid}', 'CustomersController@show');
-        // Obtem o cliente por userid
-        //Route::patch('/{userid}', 'CustomersController@update');
+        // Obtem o cliente pelo CNPJ
+        Route::get('/{cnpj}', 'CustomersController@show');
+
+        // Rotas Marketplace
+        Route::group(['prefix' => 'marketplace'], function () {
+            // Obtem o cliente pelo CNPJ
+            Route::post('/', 'CustomersController@create');
+        });
     });
 });

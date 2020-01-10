@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models\Opencart;
+namespace App\Models\Opencart\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class CustomerDocument extends Model
 {
-          /**
+  /**
    * Identificador do produto
    * @var string
    */
-  protected $primaryKey = 'address_id';
+  protected $primaryKey = 'cnpj';
   /**
    * Define a conexão padrão de acesso  a tabela
    * @var string
@@ -21,7 +21,7 @@ class Address extends Model
    * Nome da tabela
    * @var string
    */
-  protected $table = 'address';
+  protected $table = 'customer_document';
 
   /**
    * Remove o autoincremento da chave primária
@@ -35,7 +35,13 @@ class Address extends Model
    */
   public $timestamps = false;
 
-  public function customer (){
-    return $this->hasMany('App\Models\Opencart\Customer','customer_id','address_id');
-}
+
+  /**
+   * Obtem os dados do cliente
+   * @return App\Models\Opencart\Customer\Customer
+   */
+  public function customer()
+  {
+    return $this->hasOne('App\Models\Opencart\Customer\Customer', 'customer_id', 'customer_id');
+  }
 }

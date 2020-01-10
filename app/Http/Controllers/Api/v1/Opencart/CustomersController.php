@@ -3,18 +3,57 @@
 namespace App\Http\Controllers\Api\v1\Opencart;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\Opencart\Customer\Customer;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Opencart\Customer\CustomerDocument;
+use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
 
-    public function index()
+    /**
+     * Consulta Cliente pelo CNPJ
+     * @param  int  $cnpj
+     * @return \Illuminate\Http\Response
+     */
+    public function show($cnpj)
     {
 
-        $customer = Customer::find(20);
+        try {
 
-        return response()->json($customer);
+            // Obtem o cliente com base no CNPJ
+            $customer = CustomerDocument::findOrFail(onlyNumbers($cnpj));
+            // Obtem os dados do clientes
+            $customer->customer;
+            // Obtem o endereço do cliente
+            $customer->customer->address;
+
+            // Obtem a mensagem de erro da excessão a mensagem de erro
+            $data = [
+                'success' => true,
+                'data' => $customer,
+            ];
+
+            return response()->json($data);
+        } catch (\Exception $exception) {
+
+            $code = 400;
+            // Obtem a mensagem de erro da excessão a mensagem de erro
+            $data = [
+                'success' => false,
+                'data' => [
+                    'message' => $exception->getMessage(),
+                ],
+            ];
+            return response()->json($data, $code);
+        }
+    }
+
+    /**
+     * Grava o novo cliente
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        var_dump($request->all());
     }
 }
