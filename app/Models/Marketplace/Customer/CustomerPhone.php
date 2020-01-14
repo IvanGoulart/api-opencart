@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Opencart\Customer;
+namespace App\Models\Marketplace\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class CustomerPhone extends Model
 {
-  /**
+      /**
    * Identificador do produto
    * @var string
    */
@@ -15,13 +15,13 @@ class Address extends Model
    * Define a conexão padrão de acesso  a tabela
    * @var string
    */
-  protected $connection = 'mysql';
+  protected $connection = 'lojamarkvn';
 
   /**
    * Nome da tabela
    * @var string
    */
-  protected $table = 'address';
+  protected $table = 'customer_phone';
 
   /**
    * Remove o autoincremento da chave primária
@@ -37,6 +37,8 @@ class Address extends Model
 
   public function customer()
   {
-    return $this->hasMany('App\Models\Opencart\Customer\Customer', 'documentnr', 'documentnr');
+    return $this->hasMany('App\Models\Marketplace\Customer\Customer', 'documentnr', 'documentnr');
   }
+
+
 }

@@ -4,7 +4,7 @@ namespace App\Models\Opencart\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class Customer extends Model
 {
   /**
    * Identificador do produto
@@ -15,13 +15,13 @@ class Address extends Model
    * Define a conexão padrão de acesso  a tabela
    * @var string
    */
-  protected $connection = 'mysql';
+  protected $connection = 'lojamarkvn';
 
   /**
    * Nome da tabela
    * @var string
    */
-  protected $table = 'address';
+  protected $table = 'customer';
 
   /**
    * Remove o autoincremento da chave primária
@@ -35,8 +35,26 @@ class Address extends Model
    */
   public $timestamps = false;
 
-  public function customer()
+
+  /**
+   * Obter o endereço do cliente
+   * @return App\Models\Opencart\Address
+   */
+
+  /**
+   * The attributes that should be hidden for arrays.
+   *
+   * @var array
+   */
+  protected $hidden = [];
+
+  /**
+   * Traduz o JSON para um objeto usavel em PHP  
+   * @param string $value
+   * @return void object 
+   */
+  public function getCustomFieldAttribute($value)
   {
-    return $this->hasMany('App\Models\Opencart\Customer\Customer', 'documentnr', 'documentnr');
+    return json_decode($value);
   }
 }

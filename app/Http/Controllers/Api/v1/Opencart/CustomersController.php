@@ -4,10 +4,20 @@ namespace App\Http\Controllers\Api\v1\Opencart;
 
 use App\Http\Controllers\Controller;
 use App\Models\Opencart\Customer\CustomerDocument;
+use App\Models\Marketplace\Customer\CustomerAddress;
+use App\Models\Marketplace\Customer\CustomerPhone;
+use App\Models\Marketplace\Customer\Customer;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
+    public function index(){
+        
+       $customer = Customer::find(26217642000131);
+       $customer->address;
+       return response()->json($customer);
+
+    }
 
     /**
      * Consulta Cliente pelo CNPJ
