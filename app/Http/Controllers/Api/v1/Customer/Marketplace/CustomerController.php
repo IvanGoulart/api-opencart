@@ -1,23 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Opencart;
+namespace App\Http\Controllers\Api\v1\Customer\Marketplace;
 
 use App\Http\Controllers\Controller;
-use App\Models\Opencart\Customer\CustomerDocument;
-use App\Models\Marketplace\Customer\CustomerAddress;
-use App\Models\Marketplace\Customer\CustomerPhone;
-use App\Models\Marketplace\Customer\Customer;
+use App\Models\Marketplace\Customer\Customer as MarketplaceCustomer;
+use App\Models\Opencart\Customer\Customer as OpencartCustomer;
 use Illuminate\Http\Request;
 
-class CustomersController extends Controller
+class CustomerController extends Controller
 {
-    public function index(){
-        
-       $customer = Customer::find(26217642000131);
-       $customer->address;
-       return response()->json($customer);
-
-    }
 
     /**
      * Consulta Cliente pelo CNPJ
@@ -30,11 +21,11 @@ class CustomersController extends Controller
         try {
 
             // Obtem o cliente com base no CNPJ
-            $customer = CustomerDocument::findOrFail(onlyNumbers($cnpj));
-            // Obtem os dados do clientes
-            $customer->customer;
+            $customer = MarketplaceCustomer::findOrFail(onlyNumbers($cnpj));
             // Obtem o endereço do cliente
-            $customer->customer->address;
+            $customer->address;
+            // Obtem o endereço do cliente
+            $customer->phone;
 
             // Obtem a mensagem de erro da excessão a mensagem de erro
             $data = [
@@ -64,6 +55,7 @@ class CustomersController extends Controller
      */
     public function create(Request $request)
     {
-        var_dump($request->all());
+        $customer = new OpencartCustomer;
+        //dd($request->all());
     }
 }

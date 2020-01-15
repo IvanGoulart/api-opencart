@@ -5,27 +5,31 @@
 ---------------------------------------------------*/
 Route::post('auth', 'APIController@login');
 
-
 Route::group([
     'prefix' => 'v1',
-    'namespace' => 'Api\v1\Opencart',
-    //    'middleware' => 'auth.jwt'
+    //'middleware' => 'auth.jwt'
 ], function () {
-    /*---------------------------------------------------
-     * CLIENTES
-    ---------------------------------------------------*/
-    Route::group(['prefix' => 'opencart'], function () {
-        Route::group(['prefix' => 'customer'], function () {
-            // Obtem o cliente pelo CNPJ
-            Route::get('/{cnpj}', 'CustomersController@show');
+    Route::group([
+        // Customer
+        'prefix' => 'customer',
+    ], function () {
+        // Opencart
+        Route::group([
+            'prefix' => 'opencart',
+            'namespace' => 'Api\v1\Customer\Opencart',
+        ], function () {
+            // Busca o cliente no opencart pelo CNPJ
+            Route::get('/{cnpj}', 'CustomerController@show');
         });
-    });
-
-    Route::group(['prefix' => 'marketplace'], function () {
-              // Rotas Marketplace
-        Route::group(['prefix' => 'customer'], function () {
-            // Obtem o cliente pelo CNPJ
-            Route::get('/', 'CustomersController@index');
+        // Marketplace
+        Route::group([
+            'prefix' => 'marketplace',
+            'namespace' => 'Api\v1\Customer\Marketplace',
+        ], function () {
+            // Busca o cliente no Marketplace pelo CNPJ
+            Route::get('/{cnpj}', 'CustomerController@show');
+            // Grava o cliente no Marketplace
+            Route::post('/', 'CustomerController@create');
         });
     });
 });

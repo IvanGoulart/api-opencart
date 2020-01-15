@@ -36,6 +36,29 @@ class Customer extends Model
   public $timestamps = false;
 
 
+  protected $fillable = [
+    'customer_id',
+    'customer_group_id',
+    'store_id',
+    'language_id',
+    'firstname',
+    'lastname',
+    'email',
+    'telephone',
+    'fax',
+    'salt',
+    'cart',
+    'wishlist',
+    'newsletter',
+    'address_id',
+    'custom_field',
+    'ip',
+    'status',
+    'safe',
+    'code',
+    'date_added',       
+];
+
   /**
    * Obter o endereço do cliente
    * @return App\Models\Opencart\Address

@@ -35,6 +35,24 @@ class Address extends Model
    */
   public $timestamps = false;
 
+  protected $fillable = [
+    'address_id',
+    'customer_id',
+    'firstname',
+    'lastname',
+    'company',
+    'address_1',
+    'address_2',
+    'city',
+    'postcode',
+    'country_id',
+    'zone_id',
+    'custom_field',  
+];
+
+
+
+
   public function customer()
   {
     return $this->hasMany('App\Models\Opencart\Customer\Customer', 'documentnr', 'documentnr');
