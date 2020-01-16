@@ -7,7 +7,7 @@ Route::post('auth', 'APIController@login');
 
 Route::group([
     'prefix' => 'v1',
-    //'middleware' => 'auth.jwt'
+    'middleware' => 'auth.jwt'
 ], function () {
     Route::group([
         // Customer

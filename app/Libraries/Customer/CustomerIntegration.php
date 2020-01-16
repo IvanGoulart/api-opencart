@@ -5,6 +5,7 @@ namespace App\Libraries\Customer;
 use App\Models\Marketplace\Customer\Customer;
 use App\Models\Marketplace\Customer\CustomerAddress;
 use App\Models\Marketplace\Customer\CustomerPhone;
+use Illuminate\Database\QueryException;
 
 class CustomerIntegration
 {
@@ -21,7 +22,13 @@ class CustomerIntegration
     CustomerPhone $customerPhone
   ) {
     try {
-    } catch (\Exception $exception) {
+      $customer->save();
+    } catch (QueryException $exception) {
+      return [
+        'sucess' => false,
+        'code' => 400, // Bad Request
+        'data' => $exception->getMessage(),
+      ];
     }
   }
 }

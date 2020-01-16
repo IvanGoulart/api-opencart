@@ -56,7 +56,12 @@ class CustomerController extends Controller
      */
     public function create(Request $request)
     {
-        $customer = new OpenCartCustomerAdapter(new CustomerIntegration);
-        return response()->json($customer->integrate($request->all()));
+
+        $openCartCustomerAdapter = new OpenCartCustomerAdapter(new CustomerIntegration);
+        $customer = $request->all();
+        return response()->json($openCartCustomerAdapter->integrate($customer));
+        // return response()->json(
+
+        //);
     }
 }
