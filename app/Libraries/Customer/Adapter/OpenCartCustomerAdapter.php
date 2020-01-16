@@ -20,7 +20,6 @@ class OpenCartCustomerAdapter extends ICustomerAdapter
 
   public function integrate(array $customer): array
   {
-
     try {
 
       // Valida os dados
