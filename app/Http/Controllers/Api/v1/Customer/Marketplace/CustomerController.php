@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api\v1\Customer\Marketplace;
 
 use App\Http\Controllers\Controller;
-use App\Models\Marketplace\Customer\Customer as MarketplaceCustomer;
-use App\Models\Opencart\Customer\Customer as OpencartCustomer;
+use App\Models\Marketplace\Customer\Customer;
 use Illuminate\Http\Request;
+use App\Libraries\Customer\CustomerIntegration;
+use App\Libraries\Customer\Adapter\OpenCartCustomerAdapter;
 
 class CustomerController extends Controller
 {
@@ -21,7 +22,7 @@ class CustomerController extends Controller
         try {
 
             // Obtem o cliente com base no CNPJ
-            $customer = MarketplaceCustomer::findOrFail(onlyNumbers($cnpj));
+            $customer = Customer::findOrFail(onlyNumbers($cnpj));
             // Obtem o endereço do cliente
             $customer->address;
             // Obtem o endereço do cliente
@@ -55,7 +56,7 @@ class CustomerController extends Controller
      */
     public function create(Request $request)
     {
-        $customer = new OpencartCustomer;
-        //dd($request->all());
+        $customer = new OpenCartCustomerAdapter(new CustomerIntegration);
+        return response()->json($customer->integrate($request->all()));
     }
 }

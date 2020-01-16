@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-      /**
+  /**
    * Identificador do produto
    * @var string
    */
@@ -44,6 +44,4 @@ class Customer extends Model
   {
     return $this->hasOne('App\Models\Marketplace\Customer\CustomerPhone', 'documentnr', 'documentnr');
   }
-
-
 }
