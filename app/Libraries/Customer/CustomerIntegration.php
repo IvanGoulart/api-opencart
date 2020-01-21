@@ -23,6 +23,9 @@ class CustomerIntegration
   ) {
     try {
       $customer->save();
+      $customerAddress->save();
+      $customerPhone->save();
+      
     } catch (QueryException $exception) {
       return [
         'sucess' => false,
